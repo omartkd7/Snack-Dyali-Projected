@@ -3,13 +3,20 @@
   "version": "1.0.0",
   "main": "index.ts",
   "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
     "expo": "~57.0.7",
     "expo-status-bar": "~57.0.1",
+    "express": "^5.2.1",
+    "pg": "^8.22.0",
+    "pg-hstore": "^2.3.4",
     "react": "19.2.3",
-    "react-native": "0.86.0"
+    "react-native": "0.86.0",
+    "sequelize": "^6.37.8"
   },
   "devDependencies": {
     "@types/react": "~19.2.2",
+    "nodemon": "^3.1.14",
     "typescript": "~6.0.3"
   },
   "scripts": {
@@ -18,5 +25,18 @@
     "ios": "expo start --ios",
     "web": "expo start --web"
   },
-  "private": true
+  "private": true,
+  "description": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/omartkd7/Snack-Dyali.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/omartkd7/Snack-Dyali/issues"
+  },
+  "homepage": "https://github.com/omartkd7/Snack-Dyali#readme"
 }
