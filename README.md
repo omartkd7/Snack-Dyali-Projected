@@ -151,4 +151,4 @@ Objectif : garder le menu à jour même quand le réseau du snack est instable o
 
 ## Auteur
 
-Mohamed Harboulic
+Mohamed Harboulic.
