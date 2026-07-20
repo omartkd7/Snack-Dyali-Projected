@@ -1,0 +1,198 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Snack Dyali API",
+    "version": "1.0.0",
+    "description": "API REST pour gérer le menu d'un snack (CRUD sur la table `plats`)."
+  },
+  "servers": [
+    { "url": "http://localhost:3000", "description": "Serveur local" }
+  ],
+  "tags": [
+    { "name": "Plats", "description": "Gestion des plats du menu" }
+  ],
+  "paths": {
+    "/api/plats": {
+      "get": {
+        "tags": ["Plats"],
+        "summary": "Lister tous les plats",
+        "responses": {
+          "200": {
+            "description": "Liste des plats",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/Plat" }
+                },
+                "example": [
+                  { "id": 1, "nom": "Tacos poulet", "prix": 35.00, "categorie": "Tacos", "disponible": true, "created_at": "2026-07-20T10:00:00Z" },
+                  { "id": 2, "nom": "Panini viande", "prix": 25.00, "categorie": "Sandwich", "disponible": true, "created_at": "2026-07-20T10:00:00Z" }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Plats"],
+        "summary": "Créer un plat",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/PlatInput" },
+              "example": { "nom": "Msemen", "prix": 5.00, "categorie": "Dessert" }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Plat créé",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Plat" },
+                "example": { "id": 5, "nom": "Msemen", "prix": 5.00, "categorie": "Dessert", "disponible": true, "created_at": "2026-07-20T10:00:00Z" }
+              }
+            }
+          },
+          "400": {
+            "description": "Données invalides (nom vide, prix négatif, etc.)",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" },
+                "example": { "message": "Le champ 'nom' est requis et 'prix' doit être positif." }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/plats/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "Identifiant du plat",
+          "schema": { "type": "integer", "example": 1 }
+        }
+      ],
+      "get": {
+        "tags": ["Plats"],
+        "summary": "Récupérer le détail d'un plat",
+        "responses": {
+          "200": {
+            "description": "Plat trouvé",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Plat" },
+                "example": { "id": 1, "nom": "Tacos poulet", "prix": 35.00, "categorie": "Tacos", "disponible": true, "created_at": "2026-07-20T10:00:00Z" }
+              }
+            }
+          },
+          "404": {
+            "description": "Plat introuvable",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" },
+                "example": { "message": "Plat avec l'id 1 introuvable." }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": ["Plats"],
+        "summary": "Modifier un plat",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/PlatInput" },
+              "example": { "nom": "Tacos poulet", "prix": 38.00, "categorie": "Tacos", "disponible": false }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Plat modifié",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Plat" },
+                "example": { "id": 1, "nom": "Tacos poulet", "prix": 38.00, "categorie": "Tacos", "disponible": false, "created_at": "2026-07-20T10:00:00Z" }
+              }
+            }
+          },
+          "400": {
+            "description": "Données invalides",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" },
+                "example": { "message": "Le champ 'prix' doit être un nombre positif." }
+              }
+            }
+          },
+          "404": {
+            "description": "Plat introuvable",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" },
+                "example": { "message": "Plat avec l'id 1 introuvable." }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Plats"],
+        "summary": "Supprimer un plat",
+        "responses": {
+          "204": {
+            "description": "Plat supprimé (pas de contenu)"
+          },
+          "404": {
+            "description": "Plat introuvable",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" },
+                "example": { "message": "Plat avec l'id 1 introuvable." }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Plat": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer", "example": 1 },
+          "nom": { "type": "string", "example": "Tacos poulet" },
+          "prix": { "type": "number", "format": "float", "example": 35.00 },
+          "categorie": { "type": "string", "example": "Tacos" },
+          "disponible": { "type": "boolean", "example": true },
+          "created_at": { "type": "string", "format": "date-time", "example": "2026-07-20T10:00:00Z" }
+        }
+      },
+      "PlatInput": {
+        "type": "object",
+        "required": ["nom", "prix", "categorie"],
+        "properties": {
+          "nom": { "type": "string", "example": "Tacos poulet" },
+          "prix": { "type": "number", "format": "float", "example": 35.00 },
+          "categorie": { "type": "string", "example": "Tacos" },
+          "disponible": { "type": "boolean", "example": true }
+        }
+      },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "message": { "type": "string", "example": "Message d'erreur clair." }
+        }
+      }
+    }
+  }
+}
