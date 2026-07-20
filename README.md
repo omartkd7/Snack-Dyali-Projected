@@ -39,6 +39,23 @@ Snack-Dyali/
 
 > ⚠️ Le brief demande deux dossiers `backend/` et `mobile/` à la racine. Le scaffold Expo initial (`App.tsx`, `index.ts`, `app.json`) est pour l'instant à la racine du dépôt — à déplacer dans `mobile/` au fur et à mesure de la construction de l'app.
 
+## Diagramme de classes — Backend (Jour 1)
+
+Première version de l'architecture backend à construire aujourd'hui : connexion DB → modèle `Plat` → controller → routes → app Express.
+
+Voir le diagramme : [`docs/class-diagram.md`](docs/class-diagram.md)
+
+**Tâches du jour 1 (backend) :**
+
+1. `backend/src/config/db.js` — instancier Sequelize avec `DATABASE_URL` (`.env`) et exporter la connexion
+2. `backend/src/models/plat.js` — définir le modèle `Plat` (mêmes colonnes que [`init.sql`](backend/init.sql))
+3. `backend/src/controllers/plats.controller.js` — 5 fonctions CRUD (`getAllPlats`, `getPlatById`, `createPlat`, `updatePlat`, `deletePlat`) avec gestion des codes 200/201/204/400/404
+4. `backend/src/routes/plats.routes.js` — brancher les 5 routes sur le controller
+5. `backend/src/app.js` — app Express (`cors`, `express.json()`, montage des routes, `app.listen(PORT)`)
+6. `backend/package.json` — dépendances (`express`, `sequelize`, `pg`, `cors`, `dotenv`) + scripts (`start`, `dev` avec `nodemon`)
+
+Objectif de fin de journée : `GET /api/plats` répond en JSON avec les 4 plats du seed.
+
 ## Modèle de données
 
 Une seule table : `plats`
