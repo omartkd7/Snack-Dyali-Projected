@@ -1,30 +1,22 @@
 {
   "name": "snack-dyali",
   "version": "1.0.0",
-  "main": "index.ts",
+  "main": "backend/src/app.js",
   "dependencies": {
     "@scalar/express-api-reference": "^0.10.11",
     "cors": "^2.8.6",
     "dotenv": "^17.4.2",
-    "expo": "~57.0.7",
-    "expo-status-bar": "~57.0.1",
     "express": "^5.2.1",
     "pg": "^8.22.0",
     "pg-hstore": "^2.3.4",
-    "react": "19.2.3",
-    "react-native": "0.86.0",
     "sequelize": "^6.37.8"
   },
   "devDependencies": {
-    "@types/react": "~19.2.2",
-    "nodemon": "^3.1.14",
-    "typescript": "~6.0.3"
+    "nodemon": "^3.1.14"
   },
   "scripts": {
-    "start": "expo start",
-    "android": "expo start --android",
-    "ios": "expo start --ios",
-    "web": "expo start --web"
+    "start": "node backend/src/app.js",
+    "dev": "nodemon backend/src/app.js"
   },
   "private": true,
   "description": "",
