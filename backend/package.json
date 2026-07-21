@@ -1,3 +1,17 @@
 {
-  "type": "module"
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "dev": "node --watch server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "@scalar/express-api-reference": "^0.10.11",
+    "express": "^5.2.1"
+  }
 }

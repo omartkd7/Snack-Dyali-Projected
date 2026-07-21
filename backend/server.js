@@ -1,6 +1,6 @@
 import express from "express";
 import { apiReference } from "@scalar/express-api-reference";
-import openapiSpec from "../openapi.json" with { type: "json" };
+import openapiSpec from "./openapi.json" with { type: "json" };
 
 const app = express();
 
@@ -20,4 +20,3 @@ app.listen(PORT, () => {
   console.log(`Documentation : http://localhost:${PORT}/docs`);
 });
 
-export default app;
